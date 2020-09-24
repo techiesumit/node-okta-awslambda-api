@@ -10,20 +10,20 @@ import { Container } from "react-bootstrap";
 import { withOktaAuth } from "@okta/okta-react";
 
 class Game extends React.Component {
-
+ 
   constructor(props, context) {
     super(props, context);
-/* const[form, setState] =   useState({
+    /* const[form, setState] =   useState({
+          gameState: "none",
+          lastScore: 0,
+          loading: false,
+          highScores: [],
+          player: ""
+        }); */
+    this.state = {
       gameState: "none",
       lastScore: 0,
       loading: false,
-      highScores: [],
-      player: ""
-    }); */
-    this.state={
-      gameState: "none",
-      lastScore: 0,
-      loading: false, 
       highScores: [],
       player: ""
     };
@@ -32,16 +32,17 @@ class Game extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ loading: true });
+    let currentComponent = this;
+    currentComponent.setState({ loading: true });
     fetch(process.env.REACT_APP_AMAZON_API_BASE + "/highscore")
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({ highScores: JSON.parse(result.body) });
+          currentComponent.setState({ highScores: JSON.parse(result.body) });
         })
       .then(() => this.props.authService.getUser())
       .then(user => {
-        this.setState({ loading: false, player: user.email });
+        currentComponent.setState({ loading: false, player: user.email });
       });
   }
 
@@ -62,12 +63,9 @@ class Game extends React.Component {
   }
 
   newGameClick() {
-    this.gameBoardLoaded();
+    this.setState({gameState:"playing"});
   }
 
-  gameBoardLoaded() {
-    this.setState({ gameState: "playing" });
-  }
 
   endGame(score) {
     this.setState({ gameState: "finished", lastScore: score });
