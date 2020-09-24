@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import GameHome from "../Components/GameHome";
 import GameBoard from "../Components/GameBoard";
@@ -9,21 +9,27 @@ import Header from "../Components/Header";
 import { Container } from "react-bootstrap";
 import { withOktaAuth } from "@okta/okta-react";
 
-class Game extends Component {
+class Game extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
+  constructor(props, context) {
+    super(props, context);
+/* const[form, setState] =   useState({
       gameState: "none",
       lastScore: 0,
       loading: false,
       highScores: [],
       player: ""
+    }); */
+    this.state={
+      gameState: "none",
+      lastScore: 0,
+      loading: false, 
+      highScores: [],
+      player: ""
     };
 
     this.submitHighScore = this.submitHighScore.bind(this);
-  }
+  };
 
   componentDidMount() {
     this.setState({ loading: true });
