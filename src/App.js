@@ -1,9 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import AppWithRouterAccess from "./AppWithRouterAccess";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+
+const App = () => {
+  return (
+    <Router>
+      <AppWithRouterAccess/>
+    </Router>
+  );
+};
+
+export default App;
+
+/* function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -25,3 +36,4 @@ function App() {
 }
 
 export default App;
+ */
