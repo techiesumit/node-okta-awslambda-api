@@ -10,16 +10,9 @@ import { Container } from "react-bootstrap";
 import { withOktaAuth } from "@okta/okta-react";
 
 class Game extends React.Component {
- 
+
   constructor(props, context) {
     super(props, context);
-    /* const[form, setState] =   useState({
-          gameState: "none",
-          lastScore: 0,
-          loading: false,
-          highScores: [],
-          player: ""
-        }); */
     this.state = {
       gameState: "none",
       lastScore: 0,
@@ -29,6 +22,9 @@ class Game extends React.Component {
     };
 
     this.submitHighScore = this.submitHighScore.bind(this);
+    this.newGameClick = this.newGameClick.bind(this);
+    this.endGame = this.endGame.bind(this);
+    this.gameBoardLoaded = this.gameBoardLoaded.bind(this);
   };
 
   componentDidMount() {
@@ -63,9 +59,11 @@ class Game extends React.Component {
   }
 
   newGameClick() {
-    this.setState({gameState:"playing"});
+    this.gameBoardLoaded();
   }
-
+  gameBoardLoaded() {
+    this.setState({ gameState: "playing" });
+  }
 
   endGame(score) {
     this.setState({ gameState: "finished", lastScore: score });
