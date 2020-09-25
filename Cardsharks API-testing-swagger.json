@@ -1,0 +1,167 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the API to backend the card sharks React app using Okta Single Sign on Provider",
+    "version": "1.0.0",
+    "title": "Cardsharks API"
+  },
+  "host": "xxxxxx.us.xxxx.amazonaws.com",
+  "basePath": "/testing",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/deck": {
+      "get": {
+        "operationId": "getdeck",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfCard"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/highscore": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfHighScore"
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HighScore": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "username of high score owner"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ArrayOfHighScore": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/HighScore"
+      }
+    },
+    "ArrayOfCard": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Card"
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "suit": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "string",
+          "description": "the face of the card, A, 1, 2, 3, 4, 5, 6, 7, ,8 ,9, 10, J, Q, K"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the corresponding values of each rank. Ace = 1, J = 11, Q = 12, K = 13, numerical ranks are the same value as rank"
+        },
+        "visible": {
+          "type": "boolean",
+          "description": "describes if the card is visible to the player"
+        }
+      }
+    }
+  }
+}
